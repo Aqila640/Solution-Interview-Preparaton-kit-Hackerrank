@@ -1,3 +1,5 @@
+/*finding substring in two string*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
