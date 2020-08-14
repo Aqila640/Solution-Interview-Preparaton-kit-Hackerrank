@@ -1,1 +1,1 @@
-This is a c++ solution hackerrank problems.
+This is a c++ solution to hackerrank problems.
