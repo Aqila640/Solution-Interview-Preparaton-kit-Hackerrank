@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  set<int> myset;
+  string s;
+  cin >> s;
+  string ans = "NO";
+  int a[26] = {}, n = s.length();
+
+  for (int i = 0; i < n; i++)
+  {
+    a[s[i] - 'a']++;
+  }
+  for(int i=-1; i<26; i++)
+  {
+      if(i>=0 && a[i]==0)
+      continue;
+      
+      if(i>=0)
+      a[i]--;
+      set<int> myset;
+      for(int j=0; j<26; j++)
+      {
+          if(a[j])
+          myset.insert(a[j]);
+      }
+      if(myset.size()==1)
+      ans="YES";
+      
+      if(i>=0)
+      a[i]++;
+  }
+  cout<<ans<<endl;
+    return 0;
+}
+    
