@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int minMax(int k, long a[], int n)
+{
+    long mini=INT_MAX;
+    long suba[k]={0};
+    for(int i=0; i<n-(k-1); i++)
+    {
+        int x=i;
+        for(int j=0,l=i; j<k,l<x+(k); j++,l++)
+        {
+            suba[j]=a[l];
+        }
+        mini=min(mini,(suba[k-1]-suba[0]));
+    }
+    return mini;
+}
+int main() {
+    int n;cin>>n; 
+    int k; cin>>k;
+    long a[n];
+    for(int i=0; i<n; i++)
+    cin>>a[i];
+    
+    sort(a,a+n);
+    long res=minMax(k,a,n);
+    cout<<res<<endl;
+    return 0;
+}
