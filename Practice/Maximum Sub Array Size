@@ -1,0 +1,51 @@
+//Maximum sub array size such that the sum is less then k
+//Note: you have to know binary search
+#include <bits/stdc++.h>
+using namespace std;
+
+int bsearch(int sum[],int n,int k)
+{
+    int ans=-1;
+    int low=1,high=n;
+    while(low<=high)
+    {
+        int mid = (low+high)/2;
+        int i;
+        for(i=mid; i<=n; i++)
+        {
+            if(sum[i]-sum[i-mid]>k)
+            break;
+        }
+        //cout<<i<<endl;
+        if(i==n+1)
+        {
+            low=mid+1;
+            ans=mid;
+        }
+        else 
+        high=mid-1;
+    }
+    return ans;
+}
+int sub(int a[],int n,int k)
+{
+    int sum[n+1];
+    memset(sum,0,sizeof(sum));
+    
+    for(int i=0; i<n; i++)
+    {
+        sum[i+1]=sum[i]+a[i];
+    }
+    return bsearch(sum,n,k);
+}
+int main()
+{
+    int n,k; cin>>n>>k;
+    int a[n];
+    for(int i=0; i<n; i++)
+    {
+        cin>>a[i];
+    }
+    
+    cout<<sub(a,n,k)<<endl;
+}
