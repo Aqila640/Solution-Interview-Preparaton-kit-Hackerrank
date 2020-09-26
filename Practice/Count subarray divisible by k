@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int subcount(int a[],int n,int k)
+{
+    int mod[k];
+    memset(mod,0,sizeof(mod));
+    int cumsum=0;
+    for(int i=0; i<n; i++)
+    {
+        cumsum+=a[i];
+        
+        mod[((cumsum%k)+k)%k]++;
+    }
+    int res=0;
+    for(int i=0; i<k; i++)
+    {
+        if(mod[i]>1)
+        res+=(mod[i]*(mod[i]-1))/2;
+    }
+    res+=mod[0];
+    return res;
+}
+int main() {
+	// your code goes here
+	int n,k;cin>>n>>k;
+	int a[n];
+	for(int i=0; i<n; i++)
+	cin>>a[i];
+	
+	cout<<subcount(a,n,k)<<endl;
+}
