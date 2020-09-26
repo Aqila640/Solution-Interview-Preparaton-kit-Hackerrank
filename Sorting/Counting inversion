@@ -1,0 +1,72 @@
+#include <bits/stdc++.h> 
+using namespace std;
+
+long merge(long a[], long temp[], long l, long m, long r) 
+{ 
+    long count = 0; 
+
+    long i = l; /* i is index for left subarray*/
+    long j = m; /* i is index for right subarray*/
+    long k = l; /* i is index for resultant merged subarray*/
+    while ((i <= m - 1) && (j <= r)) 
+    { 
+        if (a[i] <= a[j]) 
+            temp[k++] = a[i++]; 
+        else
+        { 
+            temp[k++] = a[j++];
+            count +=(m - i); 
+        } 
+    } 
+    while (i <= m- 1) 
+        temp[k++] = a[i++]; 
+
+    while (j <= r) 
+        temp[k++] = a[j++]; 
+
+    for (i=l; i <= r; i++) 
+        a[i] = temp[i]; 
+
+    return count; 
+} 
+
+long mergeSort(long a[], long temp[], long l, long r) 
+{ 
+    long mid, count = 0; 
+    if (r> l) 
+    { 
+        mid = (r+l)/2; 
+
+    
+        count = mergeSort(a, temp, l, mid); 
+        count += mergeSort(a, temp, mid+1, r); 
+
+        /*Merge the two parts*/
+        count += merge(a, temp, l, mid+1, r); 
+    } 
+
+    return count; 
+} 
+
+/* This function sorts the input array and returns the 
+number of inversions in the array */
+long countSwaps(long arr[], long n) 
+{ 
+    long temp[n]; 
+    return mergeSort(arr, temp, 0, n - 1); 
+} 
+
+/* Driver progra to test above functions */
+int main() 
+{ 
+   long t;cin>>t;
+   while(t--)
+   {
+       long n;cin>>n;
+       long a[n];
+       for(long i=0; i<n; i++)
+       cin>>a[i];
+
+       cout<<countSwaps(a,n)<<endl;
+   }
+} 
