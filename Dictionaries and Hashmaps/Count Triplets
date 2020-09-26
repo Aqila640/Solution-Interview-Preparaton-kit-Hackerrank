@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long count(int a[],int n,int r)
+{
+    unordered_map<int,int>left,right;
+    long long res=0;
+    for(int i=0; i<n; i++)
+    {
+        right[a[i]]++;
+    }
+    for(int i=0; i<n; i++)
+    {
+        long long c1=0,c2=0;
+        if(a[i]%r==0)
+        {
+            c1 = left[a[i]/r];
+        }
+        right[a[i]]--;
+        c2=right[a[i]*r];
+        res =res+(c1*c2);
+        left[a[i]]++;
+    }
+    return res;
+}
+int main()
+{
+    int n,r;cin>>n>>r;
+    int a[n];
+    for(int i=0; i<n; i++)
+    cin>>a[i];
+
+    cout<<count(a,n,r)<<endl;
+}
